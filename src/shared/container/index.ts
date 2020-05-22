@@ -9,7 +9,7 @@ import IUsersRepositoriy from '@modules/users/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
 import IUsersTokensRepositoriy from '@modules/users/repositories/IUserTokensRepository';
-import UsersTokensRepository from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
 
 // import IUsersTokensRepositoriy from '@modules/users/repositories/IUsersTokensRepository';
 // import UsersTokensRepository from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
@@ -23,6 +23,6 @@ container.registerSingleton<IUsersRepositoriy>(
   UsersRepository,
 );
 container.registerSingleton<IUsersTokensRepositoriy>(
-  'UsersTokensRepository',
-  UsersTokensRepository,
+  'UserTokensRepository',
+  UserTokensRepository,
 );
