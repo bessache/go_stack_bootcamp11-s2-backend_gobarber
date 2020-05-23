@@ -1,4 +1,3 @@
-// import AppError from '@shared/errors/AppError';
 import AppError from '@shared/errors/AppError';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
@@ -33,6 +32,15 @@ describe('UpdateProfile', () => {
 
     expect(updatedUser.name).toBe('John tre');
     expect(updatedUser.email).toBe('johntre@examples.com');
+  });
+  it('should not be able to update the profile from no-existing user', async () => {
+    expect(
+      updateProfile.execute({
+        user_id: 'non-existing-user-id',
+        name: 'Test',
+        email: 'test@examples.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
   it('should not be able to change to another used user email', async () => {
     await fakeUsersRepository.create({
