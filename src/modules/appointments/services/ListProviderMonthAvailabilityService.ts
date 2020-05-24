@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import { AdvancedConsoleLogger } from 'typeorm';
+// import { AdvancedConsoleLogger } from 'typeorm';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 // import User from '@modules/users/infra/typeorm/entities/User';
