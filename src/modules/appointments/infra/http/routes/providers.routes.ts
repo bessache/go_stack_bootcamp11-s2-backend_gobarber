@@ -13,6 +13,7 @@ const providerDayAvailabilityController = new ProviderDayAvailabilityController(
 
 providersRouter.use(ensureAuthenticated);
 providersRouter.get('/', providersController.index);
+
 providersRouter.get(
   '/:provide_id/month-availability',
   celebrate({
