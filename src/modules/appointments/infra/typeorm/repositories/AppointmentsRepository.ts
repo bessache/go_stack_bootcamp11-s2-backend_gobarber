@@ -13,11 +13,25 @@ class AppointmentsRepository implements IAppointmentsRepository {
     this.ormRepository = getRepository(Appointment);
   }
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
-    const findAppointment = await this.ormRepository.findOne({
-      where: { date },
+  public async findAllInDayFromProvider({
+    provider_id,
+    day,
+    month,
+    year,
+  }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
+    const parsedDay = String(day).padStart(2, '0');
+    const parsedMonth = String(month).padStart(2, '0');
+    const appointments = await this.ormRepository.find({
+      where: {
+        provider_id,
+        date: Raw(
+          dataFieldName =>
+            `to_chart(${dataFieldName}, 'DD-MM-YYYY')= '${parsedDay}-${parsedMonth}-${year}'`,
+        ),
+      },
     });
-    return findAppointment;
+
+    return appointments;
   }
 
   public async findAllInMonthFromProvider({
@@ -39,25 +53,14 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
-  public async findAllInDayFromProvider({
-    provider_id,
-    day,
-    month,
-    year,
-  }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
-    const parsedDay = String(day).padStart(2, '0');
-    const parsedMonth = String(month).padStart(2, '0');
-    const appointments = await this.ormRepository.find({
-      where: {
-        provider_id,
-        date: Raw(
-          dataFieldName =>
-            `to_chart(${dataFieldName}, 'DD-MM-YYYY')= '${parsedDay}-${parsedMonth}-${year}'`,
-        ),
-      },
+  public async findByDate(
+    date: Date,
+    provider_id: string,
+  ): Promise<Appointment | undefined> {
+    const findAppointment = await this.ormRepository.findOne({
+      where: { date, provider_id },
     });
-
-    return appointments;
+    return findAppointment;
   }
 
   public async create({
