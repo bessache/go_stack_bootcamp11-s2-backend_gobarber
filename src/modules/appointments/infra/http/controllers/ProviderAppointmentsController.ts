@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-
 import { container } from 'tsyringe';
+
 import ListProviderAppointmentsService from '@modules/appointments/services/ListProviderAppointmentsService';
 
 export default class ProviderAppointmentsController {
