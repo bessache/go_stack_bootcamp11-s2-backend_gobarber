@@ -18,7 +18,7 @@ class ProviderDayAvailabilityController {
       year: Number(year),
     });
 
-    return response.status(200).json(availability);
+    return response.json(availability);
   }
 }
 export default ProviderDayAvailabilityController;
