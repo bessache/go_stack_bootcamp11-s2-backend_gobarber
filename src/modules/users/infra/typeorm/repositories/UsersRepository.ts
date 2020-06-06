@@ -12,18 +12,6 @@ class UsersRepository implements IUsersRepository {
     this.ormRepository = getRepository(User);
   }
 
-  public async findById(id: string): Promise<User | undefined> {
-    const user = await this.ormRepository.findOne(id);
-    return user;
-  }
-
-  public async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.ormRepository.findOne({
-      where: { email },
-    });
-    return user;
-  }
-
   public async findAllProviders({
     except_user_id,
   }: IFindAllProvidersDTO): Promise<User[]> {
@@ -39,6 +27,18 @@ class UsersRepository implements IUsersRepository {
       users = await this.ormRepository.find();
     }
     return users;
+  }
+
+  public async findById(id: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne(id);
+    return user;
+  }
+
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({
+      where: { email },
+    });
+    return user;
   }
 
   public async create(userData: ICreateUserDTO): Promise<User> {

@@ -24,11 +24,9 @@ container.registerSingleton<IUsersRepository>(
 );
 container.registerSingleton<IUsersTokensRepository>(
   'UserTokensRepository',
-
   UserTokensRepository,
 );
 container.registerSingleton<INotificationsRepository>(
   'NotificationsRepository',
-
   NotificationsRepository,
 );
