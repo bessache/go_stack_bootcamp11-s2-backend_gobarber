@@ -23,9 +23,9 @@ class ListProviderDayAvailabilityService {
 
   public async execute({
     provider_id,
-    day,
-    month,
     year,
+    month,
+    day,
   }: IRequest): Promise<IResponse> {
     const appointments = await this.appointmentsRepository.findAllInDayFromProvider(
       {
@@ -35,6 +35,7 @@ class ListProviderDayAvailabilityService {
         day,
       },
     );
+
     const hourStart = 8;
     const eachHourArray = Array.from(
       { length: 10 },
@@ -47,6 +48,7 @@ class ListProviderDayAvailabilityService {
       const hasAppointmentInHour = appointments.find(
         appointment => getHours(appointment.date) === hour,
       );
+
       const compareDate = new Date(year, month - 1, day, hour);
 
       return {
