@@ -4,6 +4,7 @@ node_modules
 build/
 .vscode/
 ormconfig.json
+dist
 
 tmp/*
 !tmp/.gitkeep
